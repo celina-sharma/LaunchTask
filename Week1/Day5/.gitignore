@@ -1,0 +1,7 @@
+*.log
+.env
+server-logs/
+logs/
+node_modules/
+bundle-*.zip
+.husky/

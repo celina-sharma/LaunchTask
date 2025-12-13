@@ -1,0 +1,14 @@
+Stash Proof
+===========
+
+git stash list:
+
+git status:
+On branch release/v0.1
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	bisect-log.txt
+	cherry-pick-report.md
+	stash-proof.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
