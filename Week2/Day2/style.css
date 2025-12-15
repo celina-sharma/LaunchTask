@@ -1,0 +1,130 @@
+:root {
+  --dark-background:#2B2F38;
+  --dark-border: #1f222a;
+  --header-footer-color: linear-gradient(90deg, #6c5ce7, #a29bfe);
+  --sidebar-color: linear-gradient(180deg, #00cec9, #1dd1a1);
+  --content-color-1: linear-gradient(135deg, #4834d4, #130f40);
+  --content-color-2-3: linear-gradient(135deg, #5f6eea, #2cb8f2);
+  --spacing: 20px;
+  --border-radius: 6px;
+  --border-width: 4px;
+}
+
+
+body {
+  background-color: var(--dark-background);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing);
+}
+
+
+
+.box {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--dark-border);
+  padding: var(--spacing);
+  box-sizing: border-box;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+.app {
+  width: 900px; 
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr; 
+  grid-template-rows: 70px 180px 180px 70px; 
+  gap: var(--spacing);
+}
+
+
+.header {
+  grid-column: 1 / span 3; 
+  grid-row: 1;
+  background: var(--header-footer-color);
+}
+
+.sidebar {
+  grid-column: 1;
+  grid-row: 2 / span 2; 
+  background: var(--sidebar-color);
+}
+
+.content-1 {
+  grid-column: 2 / span 2; 
+  grid-row: 2; 
+  background: var(--content-color-1);
+}
+
+
+.content-2 {
+  grid-column: 2; 
+  grid-row: 3; 
+  background: var(--content-color-2-3);
+}
+
+.content-3 {
+  grid-column: 3; 
+  grid-row: 3; 
+  background: var(--content-color-2-3);
+}
+
+.footer {
+  grid-column: 1 / span 3; 
+  grid-row: 4;
+  background: var(--header-footer-color);
+}
+@media (max-width: 768px) {
+  .app {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    gap: 10px; 
+  }
+
+  .header {
+    grid-column: 1;
+    grid-row: 1;
+    height: 60px;
+  }
+
+  .sidebar {
+    grid-column: 1;
+    grid-row: 2;
+    height: 150px;
+  }
+
+  .content-1 {
+    grid-column: 1;
+    grid-row: 3;
+    height: 120px;
+  }
+
+  .content-2 {
+    grid-column: 1;
+    grid-row: 4;
+    height: 120px;
+  }
+
+  .content-3 {
+    grid-column: 1;
+    grid-row: 5;
+    height: 120px;
+  }
+
+  .footer {
+    grid-column: 1;
+    grid-row: 6;
+    height: 60px;
+  }
+}

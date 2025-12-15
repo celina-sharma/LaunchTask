@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products</title>
+  <link rel="stylesheet" href="stylee.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <h1 class="logo">Product Explorer</h1>
+    <a href="index.html" class="btn">Home</a>
+  </header>
+
+  <main class="products-page">
+    <h2>Products</h2>
+
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Search products..." />
+      <select id="sortSelect">
+        <option value="">Sort by price</option>
+        <option value="low-high">Low → High</option>
+        <option value="high-low">High → Low</option>
+      </select>
+    </div>
+
+    <section id="productsList" class="products-list"></section>
+  </main>
+
+  <footer class="footer">
+    <p>Powered by DummyJSON API</p>
+  </footer>
+
+  <script src="products.js"></script>
+</body>
+</html>
