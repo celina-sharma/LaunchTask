@@ -3,7 +3,6 @@ import { BoltIcon } from "@heroicons/react/24/solid";
 export default function ChakraBlock() {
   return (
     <div className="relative bg-teal-400 rounded-2xl w-full flex items-center justify-center overflow-hidden">
-      {/* Decorative shapes */}
       <div className="absolute -top-16 -right-16 w-48 h-48 bg-white/10 rounded-full" />
       <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-white/10 rounded-full" />
 

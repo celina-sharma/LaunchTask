@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -17,64 +18,70 @@ export default function Sidebar() {
 
   return (
     <aside className="w-72 bg-white min-h-screen px-6 py-8 shadow-md">
-      {/* Logo */}
-      <div className="flex items-center gap-3 mb-12">
-        <img
-          src="/logo.png"
-          alt="Purity UI Dashboard Logo"
-          className="w-9 h-9"
-        />
+      <Link href="/" className="flex items-center gap-3 mb-12">
+        <img src="/logo.png" alt="Logo" className="w-9 h-9" />
         <span className="font-semibold text-sm tracking-wide text-gray-800">
           PURITY UI DASHBOARD
         </span>
-      </div>
+      </Link>
 
-      {/* Main menu */}
+      {/* MAIN MENU */}
       <nav className="space-y-1">
         <SidebarItem
           icon={<HomeIcon />}
           label="Dashboard"
-          route="/"
-          active={pathname === "/"}
+          route="/dashboard"
+          active={pathname === "/dashboard"}
         />
 
         <SidebarItem
           icon={<TableCellsIcon />}
           label="Tables"
           route="/tables"
-          active={pathname === "/tables"}
+          active={pathname.startsWith("/tables")}
         />
 
         <SidebarItem
           icon={<CreditCardIcon />}
           label="Billing"
           route="/billing"
-          active={pathname === "/billing"}
+          active={pathname.startsWith("/billing")}
         />
 
         <SidebarItem
           icon={<WrenchScrewdriverIcon />}
           label="RTL"
           route="/rtl"
-          active={pathname === "/rtl"}
+          active={pathname.startsWith("/rtl")}
         />
       </nav>
-
-      {/* Account pages */}
       <p className="text-[11px] font-semibold text-gray-400 mt-10 mb-3 tracking-wider">
         ACCOUNT PAGES
       </p>
 
       <nav className="space-y-1">
-        <SidebarItem icon={<UserIcon />} label="Profile" />
-        <SidebarItem icon={<ArrowRightOnRectangleIcon />} label="Sign In" />
-        <SidebarItem icon={<UserPlusIcon />} label="Sign Up" />
+        <SidebarItem
+          icon={<UserIcon />}
+          label="Profile"
+          route="/dashboard/profile"
+          active={pathname.startsWith("/dashboard/profile")}
+        />
+        <SidebarItem
+          icon={<ArrowRightOnRectangleIcon />}
+          label="Sign In"
+          route="/signin"
+          active={pathname.startsWith("/signin")}
+        />
+        <SidebarItem
+          icon={<UserPlusIcon />}
+          label="Sign Up"
+          route="/signup"
+          active={pathname.startsWith("/signup")}
+        />
       </nav>
-
-      {/* Help card */}
       <div className="mt-12 bg-gradient-to-br from-teal-400 to-teal-500 rounded-2xl p-5 text-white">
         <div className="bg-white/20 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
-          <QuestionMarkCircleIcon className="w-6 h-6" />
+          <QuestionMarkCircleIcon className="w-6 h-9" />
         </div>
         <p className="font-semibold text-sm">Need help?</p>
         <p className="text-xs opacity-90 mb-4">Please check our docs</p>
@@ -86,7 +93,7 @@ export default function Sidebar() {
   );
 }
 
-/* Sidebar Item */
+/* SIDEBAR ITEM */
 function SidebarItem({ icon, label, route, active }) {
   const router = useRouter();
 
@@ -101,7 +108,7 @@ function SidebarItem({ icon, label, route, active }) {
         }`}
     >
       <div
-        className={`w-9 h-9 flex items-center justify-center rounded-lg
+        className={`w-9 h-9 flex items-center justify-center rounded-lg transition
           ${active ? "bg-teal-400 text-white" : "bg-gray-100"}`}
       >
         <span className="w-5 h-5">{icon}</span>
