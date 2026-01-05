@@ -1,6 +1,9 @@
 import Product from "../models/Product.js";
 
 class ProductRepository {
+  static async create(data){
+    return Product.create(data);
+  }
   static async findProducts(filters) {
     const {
       search,

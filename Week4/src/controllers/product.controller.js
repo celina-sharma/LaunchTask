@@ -1,5 +1,18 @@
 import ProductService from "../services/product.service.js";
 
+export const createProduct = async (req, res, next) => {
+  try {
+    const product = await ProductService.createProduct(req.body);
+
+    res.status(201).json({
+      success: true,
+      data: product
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const getProducts = async (req, res, next) => {
   try {
     const products = await ProductService.getProducts({
@@ -28,3 +41,4 @@ export const deleteProduct = async (req, res, next) => {
     next(err);
   }
 };
+export default {getProducts,deleteProduct};

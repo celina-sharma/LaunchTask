@@ -1,20 +1,27 @@
 import express from "express";
 import logger from "../utils/logger.js";
-import productRoutes from "../routes/product.route.js"
+import productRoutes from "../routes/product.route.js";
 import { errorHandler } from "../middlewares/error.middleware.js";
-import { stat } from "fs";
+import { securityMiddleware } from "../middlewares/security.js";
 
-export default function loadApp(){
-    const app = express();
-    app.use(express.json()); //Middleware pipeline (parses JSON body)
-    app.use(express.urlencoded({extended:true})); //Middleware pipeline (parses form data)
-    logger.info("Middleware loaded");
+export default function loadApp() {
+  const app = express();
+  
+  app.use(express.json({ limit: "10kb" }));
+  app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+  logger.info("Base middleware loaded");
 
-    app.get("/health",(req,res) => {
-        res.status(200).json({status: "OK"});
-    });
-    logger.info("Routes mounted: health check");
-    app.use("/products",productRoutes)
-    app.use(errorHandler);
-    return app;
+  securityMiddleware(app);
+  logger.info("Security middleware loaded");
+
+  app.get("/health", (req, res) => {
+    res.status(200).json({ status: "OK" });
+  });
+  logger.info("Routes mounted: health check");
+
+  app.use("/products", productRoutes);
+  logger.info("Routes mounted: products");
+
+  app.use(errorHandler);
+  return app;
 }

@@ -47,6 +47,7 @@ The API implements structured and centralized error handling:
 
 **Typed Errors** using a custom error class with HTTP status codes  
 **Centralized Error Middleware** to handle all errors in one place  
+
 **Unified Error Response Format**:
 ``` json
 {
