@@ -1,8 +1,10 @@
 import ProductRepository from "../repositories/product.repository.js";
+import logger from "../utils/logger.js";
 import AppError from "../utils/AppError.js";
 
 class ProductService {
   static async getProducts(filters) {
+    logger.info("User addition started :");
     return ProductRepository.findProducts(filters);
   }
 

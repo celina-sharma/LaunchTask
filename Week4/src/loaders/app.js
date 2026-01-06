@@ -3,13 +3,17 @@ import logger from "../utils/logger.js";
 import productRoutes from "../routes/product.route.js";
 import { errorHandler } from "../middlewares/error.middleware.js";
 import { securityMiddleware } from "../middlewares/security.js";
+import { requestTracing } from "../utils/tracing.js";
 
 export default function loadApp() {
   const app = express();
-  
+
   app.use(express.json({ limit: "10kb" }));
   app.use(express.urlencoded({ extended: true, limit: "10kb" }));
   logger.info("Base middleware loaded");
+
+  app.use(requestTracing);
+  logger.info("Request tracing enabled");
 
   securityMiddleware(app);
   logger.info("Security middleware loaded");

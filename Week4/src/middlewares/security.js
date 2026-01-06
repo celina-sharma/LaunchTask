@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 export function securityMiddleware(app) {
   app.use(
     helmet({
-      contentSecurityPolicy: false, // keep simple for APIs
+      contentSecurityPolicy: false, 
     })
   );
 
@@ -18,8 +18,8 @@ export function securityMiddleware(app) {
   );
 
   const limiter = rateLimit({   // Rate limiting: prevent brute force
-    windowMs: 60 * 1000, // 15 minutes
-    max: 5, // 1
+    windowMs: 60 * 1000,
+    max: 5,
     standardHeaders: true,
     legacyHeaders: false,
     message: {

@@ -24,19 +24,16 @@ class ProductRepository {
       query.deletedAt = null;
     }
 
-    // Text search
     if (search) {
       query.$text = { $search: search };
     }
 
-    // Price range
     if (minPrice || maxPrice) {
       query.price = {};
       if (minPrice) query.price.$gte = minPrice;
       if (maxPrice) query.price.$lte = maxPrice;
     }
-
-    // Tags OR condition
+    
     if (tags?.length) {
       query.tags = { $in: tags };
     }

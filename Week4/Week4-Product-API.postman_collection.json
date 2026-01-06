@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "6c5b7d8e-a405-4899-a894-5d0c38250ab3",
+		"name": "Week4-Product-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50605450",
+		"_collection_link": "https://celinas-hestabit-6120840.postman.co/workspace/Celina's-Workspace~4f098bb8-fb32-43ee-85c4-6068782b09ee/collection/50605450-6c5b7d8e-a405-4899-a894-5d0c38250ab3?action=share&source=collection_link&creator=50605450"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "get_products",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "post_products",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete_product",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "soft_delete",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job Queue",
+			"item": [
+				{
+					"name": "product_notify",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
