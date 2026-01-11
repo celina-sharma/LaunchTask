@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client-Server Communication</title>
+</head>
+<body>
+  <h1>Client</h1>
+  <button onclick="callServer()">Call Server</button>
+  <p id="output"></p>
+
+  <script>
+    function callServer() {
+      fetch("http://localhost:5000/api/message")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("output").innerText = data.message;
+        })
+        .catch(err => {
+          document.getElementById("output").innerText = "Error connecting to server";
+        });
+    }
+  </script>
+</body>
+</html>
