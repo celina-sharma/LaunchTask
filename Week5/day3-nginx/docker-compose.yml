@@ -1,9 +1,12 @@
 services:
   backend1:
     build: ./backend
+    hostname: backend-1
 
   backend2:
     build: ./backend
+    hostname: backend-2
+    
 
   nginx:
     image: nginx:latest
