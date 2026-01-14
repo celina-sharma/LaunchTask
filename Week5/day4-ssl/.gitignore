@@ -1,0 +1,14 @@
+node_modules/
+
+nginx/certs/*.pem
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/

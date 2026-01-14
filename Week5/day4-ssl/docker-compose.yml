@@ -1,0 +1,20 @@
+services:
+  backend1:
+    build: ./backend
+    hostname: backend1
+
+  backend2:
+    build: ./backend
+    hostname: backend2
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - backend1
+      - backend2
