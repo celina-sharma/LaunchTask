@@ -1,0 +1,12 @@
+nginx/certs/*.pem
+
+# Environment files
+.env
+
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Docker Data & Logs
+mongo_data/
+*.log

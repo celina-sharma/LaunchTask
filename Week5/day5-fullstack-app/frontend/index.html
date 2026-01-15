@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anonymous Wall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #dce9ec;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h2 { text-align: center; color: #333; }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px 0 0 3px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 0 3px 3px 0;
+            cursor: pointer;
+        }
+
+        button:hover { background: #555; }
+
+        .message-list {
+            padding: 0;
+            list-style: none;
+        }
+
+        .message-item {
+            background: #fff;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Anonymous Wall</h2>
+        
+        <div class="form-group">
+            <input type="text" id="box" placeholder="Type something...">
+            <button onclick="send()">Post</button>
+        </div>
+
+        <ul id="list" class="message-list"></ul>
+    </div>
+
+    <script>
+        const load = async () => {
+            try {
+                const r = await fetch('/api/messages');
+                const d = await r.json();
+                document.getElementById('list').innerHTML = d.map(m => 
+                    `<li class="message-item">${m.text}</li>`
+                ).join('');
+            } catch (e) { console.error("Load failed", e); }
+        };
+
+        const send = async () => {
+            const input = document.getElementById('box');
+            if(!input.value) return;
+            await fetch('/api/messages', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ text: input.value })
+            });
+            input.value = '';
+            load();
+        };
+
+        load();
+    </script>
+</body>
+</html>
