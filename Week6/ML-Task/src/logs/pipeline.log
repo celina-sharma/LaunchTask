@@ -1,36 +1,16 @@
-2026-01-23 15:44:48,640 - INFO - Data pipeline started
-2026-01-23 15:44:48,640 - INFO - Loading raw data from /home/celinasharma/Desktop/LaunchPad1/Week6/ML-Task/src/data/raw/hospital_admissions_dirty.csv
-2026-01-23 15:44:48,649 - INFO - Raw data shape: (1125, 13)
-2026-01-23 15:44:48,649 - INFO - Starting data cleaning
-2026-01-23 15:44:48,660 - INFO - Duplicates removed: 25
-2026-01-23 15:44:48,665 - INFO - Data cleaning completed
-2026-01-23 15:44:48,665 - INFO - Cleaned data shape: (1094, 13)
-2026-01-23 15:44:48,672 - INFO - Processed data saved at /home/celinasharma/Desktop/LaunchPad1/Week6/ML-Task/src/data/processed/final.csv
-2026-01-23 15:44:48,672 - INFO - Data pipeline completed successfully
-2026-01-25 22:25:39,281 - INFO - Data pipeline started
-2026-01-25 22:25:39,281 - INFO - Loading raw data: data/raw/hospital_admission_dirty.csv
-2026-01-25 22:25:39,289 - INFO - Raw data shape: (1125, 13)
-2026-01-25 22:25:39,289 - INFO - Starting data cleaning
-2026-01-25 22:25:39,299 - INFO - Duplicates removed: 25
-2026-01-25 22:25:39,305 - INFO - Data cleaning completed
-2026-01-25 22:25:39,305 - INFO - Cleaned data shape: (1094, 13)
-2026-01-25 22:25:39,311 - INFO - Processed data saved at: data/processed/final.csv
-2026-01-25 22:25:39,311 - INFO - Data pipeline completed successfully
-2026-01-25 22:28:24,229 - INFO - Data pipeline started
-2026-01-25 22:28:24,229 - INFO - Loading raw data from /home/celinasharma/Desktop/LaunchPad1/Week6/ML-Task/src/data/raw/hospital_admissions_dirty.csv
-2026-01-25 22:28:24,235 - INFO - Raw data shape: (1125, 13)
-2026-01-25 22:28:24,235 - INFO - Starting data cleaning
-2026-01-25 22:28:24,239 - INFO - Duplicates removed: 25
-2026-01-25 22:28:24,244 - INFO - Data cleaning completed
-2026-01-25 22:28:24,244 - INFO - Cleaned data shape: (1094, 13)
-2026-01-25 22:28:24,251 - INFO - Processed data saved at /home/celinasharma/Desktop/LaunchPad1/Week6/ML-Task/src/data/processed/final.csv
-2026-01-25 22:28:24,251 - INFO - Data pipeline completed successfully
-2026-01-25 22:29:43,154 - INFO - Data pipeline started
-2026-01-25 22:29:43,154 - INFO - Loading raw data: data/raw/hospital_admission_dirty.csv
-2026-01-25 22:29:43,160 - INFO - Raw data shape: (1125, 13)
-2026-01-25 22:29:43,160 - INFO - Starting data cleaning
-2026-01-25 22:29:43,164 - INFO - Duplicates removed: 25
-2026-01-25 22:29:43,169 - INFO - Data cleaning completed
-2026-01-25 22:29:43,169 - INFO - Cleaned data shape: (1094, 13)
-2026-01-25 22:29:43,176 - INFO - Processed data saved at: data/processed/final.csv
-2026-01-25 22:29:43,176 - INFO - Data pipeline completed successfully
+2026-01-28 15:44:30,956 - INFO - Data pipeline started
+2026-01-28 15:44:30,964 - INFO - Loading raw Titanic dataset
+2026-01-28 15:44:30,969 - INFO - Raw data shape: (891, 12)
+2026-01-28 15:44:30,970 - INFO - Starting data cleaning
+2026-01-28 15:44:30,975 - INFO - Data cleaning completed
+2026-01-28 15:44:30,975 - INFO - Cleaned data shape: (775, 11)
+2026-01-28 15:44:30,975 - INFO - Saving cleaned dataset to data/processed/final.csv
+2026-01-28 15:44:30,980 - INFO - Data pipeline completed successfully
+2026-01-28 15:54:07,514 - INFO - Data pipeline started
+2026-01-28 15:54:07,514 - INFO - Loading raw Titanic dataset
+2026-01-28 15:54:07,519 - INFO - Raw data shape: (891, 12)
+2026-01-28 15:54:07,519 - INFO - Starting data cleaning
+2026-01-28 15:54:07,525 - INFO - Data cleaning completed
+2026-01-28 15:54:07,526 - INFO - Cleaned data shape: (775, 11)
+2026-01-28 15:54:07,526 - INFO - Saving cleaned dataset to data/processed/final.csv
+2026-01-28 15:54:07,530 - INFO - Data pipeline completed successfully

@@ -1,0 +1,14 @@
+{
+    "Age": {
+        "p_value": 0.35369,
+        "drift_detected": false
+    },
+    "Fare": {
+        "p_value": 6e-05,
+        "drift_detected": true
+    },
+    "Pclass": {
+        "p_value": 0.38622,
+        "drift_detected": false
+    }
+}
