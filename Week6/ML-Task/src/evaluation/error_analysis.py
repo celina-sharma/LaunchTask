@@ -14,7 +14,7 @@ OUTPUT_PATH = BASE_DIR / "evaluation" / "error_heatmap.png"
 # Load data
 df = pd.read_csv(DATA_PATH)
 
-# Feature engineering (same as training)
+# Feature engineering
 df["FamilySize"] = df["SibSp"] + df["Parch"] + 1
 df["IsAlone"] = (df["FamilySize"] == 1).astype(int)
 

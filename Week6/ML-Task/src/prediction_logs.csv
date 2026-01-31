@@ -1,7 +1,0 @@
-
-2026-01-29T11:09:32.623923,a19e0bfc-af9a-4149-814b-96bc57e8ac06,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 3}",0.4796,0
-2026-01-29T11:21:28.730245,3a65dd3b-bfe4-49a7-a5ac-f808e122f658,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 3}",0.4796,0
-2026-01-29T11:22:01.849602,ed5ca929-b615-476e-b227-6401ef30b72e,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 3}",0.4796,0
-
-2026-01-29T11:26:40.673643,2d7fe084-dcd7-4f08-a8d0-6ba545eb1e76,v1.0,"{'Sex_male': 0, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 3}",0.762,1
-2026-01-29T11:26:54.160141,92cd9bdd-cb70-4234-9c67-9d43ea820f71,v1.0,"{'Sex_male': 0, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 0, 'IsAlone': 1, 'Age': 28, 'SibSp': 1, 'Pclass': 3}",0.4213,0

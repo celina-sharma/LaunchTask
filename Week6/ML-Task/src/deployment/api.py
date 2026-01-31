@@ -9,8 +9,8 @@ from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 MODEL_PATH = BASE_DIR / "models" / "best_model.pkl"
-LOG_FILE = BASE_DIR / "prediction_logs.csv"
-
+LOG_FILE = BASE_DIR / "logs"/"prediction_logs.csv"
+LOG_FILE.parent.mkdir(exist_ok=True)
 #Load Model
 model = joblib.load(MODEL_PATH)
 MODEL_VERSION = "v1.0"
@@ -65,14 +65,15 @@ def home():
 
 #Input Schema
 class PassengerInput(BaseModel):
-    Sex_male: int = Field(..., example=1)
-    Fare: float = Field(..., example=32.2)
-    Embarked_S: int = Field(..., example=1)
-    Embarked_Q: int = Field(..., example=0)
-    IsAlone: int = Field(..., example=0)
-    Age: int = Field(..., example=28)
-    SibSp: int = Field(..., example=1)
-    Pclass: int = Field(..., example=3)
+    Sex_male: int = Field(..., ge=0, le=1, example=0)
+    Fare: float = Field(..., ge=0, le=1000, example=32.2)
+    Embarked_S: int = Field(..., ge=0, le=1)
+    Embarked_Q: int = Field(..., ge=0, le=1)
+    IsAlone: int = Field(..., ge=0, le=1)
+    Age: int = Field(..., ge=0, le=100, example=28)
+    SibSp: int = Field(..., ge=0, le=10)
+    Pclass: int = Field(..., ge=1, le=3)
+
 
 #Predict Endpoint
 @app.post("/predict")

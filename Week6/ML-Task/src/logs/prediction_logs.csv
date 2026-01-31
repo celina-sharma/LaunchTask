@@ -1,0 +1,7 @@
+timestamp,request_id,model_version,input_data,probability,prediction
+2026-01-31T12:14:30.756322,0447988d-b9d1-4866-b30f-7f56ba244613,v1.0,"{'Sex_male': 0, 'Fare': 90.0, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 50, 'SibSp': 10, 'Pclass': 1}",0.3891,0
+2026-01-31T12:23:59.550948,6ee8f43d-a8df-40a5-8b34-d55a848c7b46,v1.0,"{'Sex_male': 0, 'Fare': 90.0, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 20, 'SibSp': 10, 'Pclass': 1}",0.3891,0
+2026-01-31T12:24:07.110765,ffc272e2-bf4b-43a6-a32a-9d40d487a7ce,v1.0,"{'Sex_male': 1, 'Fare': 90.0, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 20, 'SibSp': 10, 'Pclass': 1}",0.8015,1
+2026-01-31T12:25:06.463842,88ea4266-f386-4fe6-ba32-5404a5e907ef,v1.0,"{'Sex_male': 1, 'Fare': 90.0, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 20, 'SibSp': 10, 'Pclass': 1}",0.8015,1
+2026-01-31T14:22:23.514947,6fca900e-10a5-4d4a-b813-00cf50b24c7b,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 1, 'Age': 99, 'SibSp': 10, 'Pclass': 1}",0.6063,1
+2026-01-31T14:33:15.446205,4c205177-e11a-41f5-9de3-8e4287b02f09,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 1}",0.9387,1

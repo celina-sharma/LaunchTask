@@ -7,22 +7,23 @@ import json
 BASE_DIR = Path(__file__).resolve().parents[1]
 
 TRAIN_PATH = BASE_DIR / "data" / "processed" / "final.csv"
-LOG_PATH = BASE_DIR / "prediction_logs.csv"
+LOG_PATH = BASE_DIR / "logs" / "prediction_logs.csv"
 
-#Explicit column names
-log_columns = [
-    "timestamp",
-    "request_id",
-    "model_version",
-    "input_data",
-    "probability",
-    "prediction"
-]
-
-logs_df = pd.read_csv(LOG_PATH, names=log_columns)
 train_df = pd.read_csv(TRAIN_PATH)
+logs_df = pd.read_csv(LOG_PATH)
 
-inputs_df = logs_df["input_data"].apply(ast.literal_eval).apply(pd.Series)
+def safe_parse(x):
+    try:
+        return ast.literal_eval(x)
+    except Exception:
+        return None
+
+inputs_df = (
+    logs_df["input_data"]
+    .apply(safe_parse)
+    .dropna()
+    .apply(pd.Series)
+)
 
 FEATURES = ["Age", "Fare", "Pclass"]
 
@@ -39,7 +40,6 @@ for feature in FEATURES:
         "drift_detected": bool(p_value < 0.05)
     }
 
-# Save report
 OUTPUT_DIR = BASE_DIR / "monitoring"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
