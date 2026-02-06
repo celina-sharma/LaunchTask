@@ -2,13 +2,11 @@ import json
 import faiss
 import numpy as np
 from pathlib import Path
-from utils.embedding_model import get_embedding_model
+from src.utils.embedding_model import get_embedding_model
 
-# -------- CONFIG --------
 INDEX_PATH = Path("src/data/vectorstore/index.faiss")
 META_PATH = Path("src/data/vectorstore/metadata.json")
 EMBEDDINGS_NPY = Path("src/data/embeddings/embeddings.npy")
-# ------------------------
 
 
 def load_index():
@@ -28,27 +26,15 @@ def load_index():
 def semantic_search(query: str, top_k: int = 5):
     """
     FAISS-based semantic search (cosine similarity).
-
-    Returns list of dicts:
-    {
-        text,
-        metadata,
-        score,
-        embedding
-    }
     """
-    # ✅ Load model ONCE (shared singleton)
     model = get_embedding_model()
-
     index, metadata, embeddings = load_index()
 
-    # Encode + normalize query
     query_embedding = model.encode(
         query,
         normalize_embeddings=True
     ).astype("float32")
 
-    # FAISS expects shape (1, dim)
     scores, indices = index.search(
         query_embedding.reshape(1, -1),
         top_k
@@ -57,19 +43,19 @@ def semantic_search(query: str, top_k: int = 5):
     results = []
     for idx, score in zip(indices[0], scores[0]):
         results.append({
+            "id": metadata[idx]["id"],
             "text": metadata[idx]["text"],
             "metadata": {
-                "source": metadata[idx]["source"]
+                "source": metadata[idx]["metadata"]["source"],
+                "page": metadata[idx]["metadata"].get("page")
             },
             "score": float(score),
-            # 👇 critical for MMR
+            # used later for MMR
             "embedding": embeddings[idx]
         })
 
     return results
 
-
-# ---------------- CLI TEST ----------------
 if __name__ == "__main__":
     query = input("Enter your question: ")
     results = semantic_search(query)

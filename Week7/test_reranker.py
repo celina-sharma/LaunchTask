@@ -1,5 +1,5 @@
-from retriever.hybrid_retriever import HybridRetriever
-from retriever.reranker import Reranker
+from src.retriever.hybrid_retriever import HybridRetriever
+from src.retriever.reranker import Reranker
 
 query = "credit underwriting risk assessment"
 
@@ -12,7 +12,6 @@ print(f"Candidates fetched: {len(candidates)}")
 reranker = Reranker(top_k=5)
 results = reranker.rerank(query, candidates)
 
-#Inspect results
 for i, r in enumerate(results, 1):
     print(i, r["rerank_score"])
     print(r["metadata"]["source"])

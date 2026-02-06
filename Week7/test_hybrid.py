@@ -1,19 +1,17 @@
 import json
 import numpy as np
-
-from retriever.hybrid_retriever import HybridRetriever
-from retriever.reranker import Reranker
-from retriever.mmr import mmr
-from pipelines.context_builder import build_context_json
-from utils.embedding_model import get_embedding_model
+from src.retriever.hybrid_retriever import HybridRetriever
+from src.retriever.reranker import Reranker
+from src.retriever.mmr import mmr
+from src.pipelines.context_builder import build_context_json
+from src.utils.embedding_model import get_embedding_model
 
 
 query = "credit underwriting risk assessment loan evaluation"
 
-# ✅ Load shared embedding model ONCE
+#load shared embedding model once
 embed_model = get_embedding_model()
 
-# ---------------- HYBRID RETRIEVAL ----------------
 retriever = HybridRetriever(
     semantic_k=15,
     keyword_k=15
@@ -22,12 +20,12 @@ retriever = HybridRetriever(
 candidates = retriever.search(query)
 print(f"[INFO] Candidates after hybrid retrieval: {len(candidates)}")
 
-# ---------------- RERANKING ----------------
 reranker = Reranker(top_k=10)
 reranked = reranker.rerank(query, candidates)
 print(f"[INFO] Candidates after reranking: {len(reranked)}")
 
-# ---------------- MMR ----------------
+reranked = [c for c in reranked if "embedding" in c]
+
 query_embedding = embed_model.encode(
     query,
     normalize_embeddings=True
@@ -45,7 +43,6 @@ final_results = mmr(
     top_k=5
 )
 
-# ---------------- CONTEXT BUILDING ----------------
 context_json = build_context_json(
     final_results,
     query=query,

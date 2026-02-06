@@ -3,51 +3,40 @@ import faiss
 import numpy as np
 from pathlib import Path
 
-# ---------- CONFIG ----------
-EMBEDDINGS_JSON = Path("src/data/embeddings/embeddings.json")
-EMBEDDINGS_NPY = Path("src/data/embeddings/embeddings.npy")
+
+EMBEDDINGS_JSONL = Path("src/data/embeddings/embeddings.jsonl")
 
 VECTORSTORE_DIR = Path("src/data/vectorstore")
 INDEX_FILE = VECTORSTORE_DIR / "index.faiss"
 METADATA_FILE = VECTORSTORE_DIR / "metadata.json"
-# ----------------------------
 
 
 def load_embeddings():
     """
-    Load embeddings and metadata from embeddings.json
+    Load embeddings and metadata from embeddings.jsonl (JSONL format)
     """
-    with open(EMBEDDINGS_JSON, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
     vectors = []
     metadata = []
 
-    for item in data:
-        vectors.append(item["embedding"])
+    with open(EMBEDDINGS_JSONL, "r", encoding="utf-8") as f:
+        for line in f:
+            record = json.loads(line)
 
-        # 🔥 CRITICAL FIX: store TEXT + SOURCE
-        metadata.append({
-            "text": item["text"],
-            "source": item["metadata"]["source"]
-        })
+            vectors.append(record["vector"])
+            metadata.append({
+                "id": record["id"],
+                "text": record["text"],
+                "metadata": record["metadata"],
+            })
 
     vectors = np.array(vectors, dtype="float32")
     return vectors, metadata
 
 
-def save_embeddings_npy(vectors):
-    """
-    Save raw embeddings as .npy file
-    """
-    EMBEDDINGS_NPY.parent.mkdir(parents=True, exist_ok=True)
-    np.save(EMBEDDINGS_NPY, vectors)
-    print(f"[✓] Embeddings saved at {EMBEDDINGS_NPY}")
-
-
 def build_faiss_index(vectors):
     """
-    Build FAISS index (cosine similarity via Inner Product)
+    Build FAISS index using Inner Product (cosine similarity).
+    Assumes embeddings are already normalized.
     """
     dim = vectors.shape[1]
     index = faiss.IndexFlatIP(dim)
@@ -66,16 +55,19 @@ def save_faiss_index(index, metadata):
     with open(METADATA_FILE, "w", encoding="utf-8") as f:
         json.dump(metadata, f, indent=2)
 
-    print(f"[✓] FAISS index saved at {INDEX_FILE}")
-    print(f"[✓] Metadata saved at {METADATA_FILE}")
+    print(f"FAISS index saved → {INDEX_FILE}")
+    print(f"Metadata saved → {METADATA_FILE}")
 
 
 def main():
-    print("[INFO] Loading embeddings from JSON...")
+    print("[INFO] Loading embeddings...")
     vectors, metadata = load_embeddings()
-    print(f"[INFO] Total vectors: {vectors.shape[0]}")
 
-    save_embeddings_npy(vectors)
+    if len(vectors) == 0:
+        print("[ERROR] No embeddings found. Exiting.")
+        return
+
+    print(f"[INFO] Total vectors loaded: {vectors.shape[0]}")
 
     print("[INFO] Building FAISS index...")
     index = build_faiss_index(vectors)

@@ -1,24 +1,26 @@
 def build_context_json(chunks, query, max_chars=6000):
     context_items = []
     current_len = 0
+    PREVIEW_CHARS = 800
 
     for i, chunk in enumerate(chunks, 1):
-        text = chunk["text"].strip()
+        text = chunk.get("text", "").strip()
 
-        # limit per chunk for readability
-        PREVIEW_CHARS = 800
+        if not text:
+            continue
+
         if len(text) > PREVIEW_CHARS:
             text = text[:PREVIEW_CHARS] + "..."
 
+        if current_len + len(text) > max_chars:
+            break
+
         item = {
             "id": i,
-            "source": chunk["metadata"]["source"],
+            "source": chunk.get("metadata", {}).get("source", "unknown"),
             "retrieval_type": chunk.get("retrieval_type", "unknown"),
             "text": text
         }
-
-        if current_len + len(text) > max_chars:
-            break
 
         context_items.append(item)
         current_len += len(text)
@@ -27,3 +29,6 @@ def build_context_json(chunks, query, max_chars=6000):
         "query": query,
         "contexts": context_items
     }
+
+
+    

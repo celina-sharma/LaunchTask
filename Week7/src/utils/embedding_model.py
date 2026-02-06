@@ -4,6 +4,8 @@ _MODEL = None
 
 def get_embedding_model():
     global _MODEL
+
     if _MODEL is None:
-        _MODEL = SentenceTransformer("BAAI/bge-small-en")
+        print("[INFO] Loading embedding model (singleton)...")
+        _MODEL = SentenceTransformer("BAAI/bge-base-en-v1.5")
     return _MODEL
