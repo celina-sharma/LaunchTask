@@ -21,6 +21,11 @@ def call_llm(prompt: str) -> str:
 
 
 def _groq_call(prompt: str) -> str:
+    if not API_KEY:
+        raise RuntimeError(
+            f"{cfg['api_key_env']} not found. Did you export it?"
+        )
+
     client = Groq(api_key=API_KEY)
 
     completion = client.chat.completions.create(
@@ -28,7 +33,10 @@ def _groq_call(prompt: str) -> str:
         messages=[
             {
                 "role": "system",
-                "content": "You are an expert SQL generator. Return ONLY valid SQLite SQL. No explanations."
+                "content": (
+                    "You are an expert SQL generator. "
+                    "Return ONLY valid SQLite SQL. No markdown. No explanations."
+                )
             },
             {
                 "role": "user",

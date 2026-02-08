@@ -16,14 +16,13 @@ class ImageRetriever:
         with open(IMAGE_DATA, "r", encoding="utf-8") as f:
             self.data = json.load(f)
 
-        # Collect embeddings
         self.image_embeddings = np.array(
             [d["image_embedding"] for d in self.data],
             dtype="float32"
         )
 
     def search(self, query: str, top_k: int = 5):
-        #encode query as CLIP text embedding
+        #enco
         query_embedding = self.model.encode(
             query,
             normalize_embeddings=True
@@ -34,10 +33,9 @@ class ImageRetriever:
             self.image_embeddings
         )[0]
 
-        #rank indices
         top_indices = scores.argsort()[::-1][:top_k]
 
-        results = []
+        results = []                     
         for idx in top_indices:
             item = self.data[idx]
             results.append({
@@ -46,8 +44,10 @@ class ImageRetriever:
                 "source_pdf": item["source_pdf"],
                 "page": item["page"],
                 "caption": item.get("caption", ""),
+                "ocr_text": item.get("ocr_text", ""),
                 "score": float(scores[idx])
-            })
+        })
+
 
         return results
     
@@ -77,6 +77,7 @@ class ImageRetriever:
                 "source_pdf": item["source_pdf"],
                 "page": item["page"],
                 "caption": item.get("caption", ""),
+                "ocr_text": item.get("ocr_text", ""),
                 "score": float(scores[idx])
             })
 
