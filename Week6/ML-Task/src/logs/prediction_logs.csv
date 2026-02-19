@@ -5,3 +5,12 @@ timestamp,request_id,model_version,input_data,probability,prediction
 2026-01-31T12:25:06.463842,88ea4266-f386-4fe6-ba32-5404a5e907ef,v1.0,"{'Sex_male': 1, 'Fare': 90.0, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 20, 'SibSp': 10, 'Pclass': 1}",0.8015,1
 2026-01-31T14:22:23.514947,6fca900e-10a5-4d4a-b813-00cf50b24c7b,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 1, 'Age': 99, 'SibSp': 10, 'Pclass': 1}",0.6063,1
 2026-01-31T14:33:15.446205,4c205177-e11a-41f5-9de3-8e4287b02f09,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 1}",0.9387,1
+2026-02-11T00:06:14.295242,7c79c2db-62e3-43b1-bbed-570d498a677f,v1.0,"{'Sex_male': 0, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 28, 'SibSp': 10, 'Pclass': 3}",0.7607,1
+2026-02-11T00:06:23.116145,ddf9eebf-e2fd-479b-96b6-746a3d758250,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 28, 'SibSp': 10, 'Pclass': 3}",0.6345,1
+2026-02-11T00:06:37.538807,54d49cab-a3cb-4a44-b14a-e63ed6fc980c,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 50, 'SibSp': 10, 'Pclass': 3}",0.6345,1
+2026-02-11T00:07:21.381311,7706273e-5f5f-4424-8a3c-211d20de6f6e,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 1, 'Embarked_Q': 1, 'IsAlone': 1, 'Age': 0, 'SibSp': 10, 'Pclass': 3}",0.4507,0
+2026-02-11T04:46:10.692946,5e8c9be6-cf33-4963-a867-d3c895956649,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 1}",0.9387,1
+2026-02-11T04:46:17.674717,db1fd751-2ef4-466d-8417-994217fadd37,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 28, 'SibSp': 1, 'Pclass': 3}",0.6369,1
+2026-02-11T04:46:28.275645,4691beaf-e11c-4dc9-a51f-b9613f7389c5,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 0, 'SibSp': 1, 'Pclass': 3}",0.3248,0
+2026-02-11T04:46:34.408243,964a782f-3272-4c39-afd0-8ed7268a44fe,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 0, 'Age': 0, 'SibSp': 1, 'Pclass': 3}",0.3248,0
+2026-02-11T04:47:07.755379,e9c2c87c-ba65-47ba-83b6-56db259c0ff7,v1.0,"{'Sex_male': 1, 'Fare': 32.2, 'Embarked_S': 0, 'Embarked_Q': 0, 'IsAlone': 1, 'Age': 28, 'SibSp': 9, 'Pclass': 3}",0.1716,0

@@ -4,12 +4,13 @@ services:
   mongo:
     image: mongo
     volumes:
-      - mongo-data:/data/db
+      - mongo-data:/data/db  ##mongo-data is the named docker volume(managed by docker)
 
   server:
     build: ./server
     volumes :
       - ./server:/app
+      - /app/node_modules
     ports:
       - "5000:5000"
     depends_on:

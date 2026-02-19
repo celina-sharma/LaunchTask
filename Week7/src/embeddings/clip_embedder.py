@@ -43,7 +43,15 @@ def main():
                 item["image_path"]
             ).tolist()
             
-            combined_text = f"{item.get('caption','')} {item.get('ocr_text','')}".strip()
+            ocr = item.get("ocr_text", "").strip()
+            caption = item.get("caption", "").strip()
+
+            # Simple OCR quality check
+            if len(ocr) < 40:
+                 combined_text = caption
+            else:
+             combined_text = f"{ocr} {ocr}"
+
             item["text_embedding"] = embedder.embed_text(
                 combined_text if combined_text else " "
             ).tolist()

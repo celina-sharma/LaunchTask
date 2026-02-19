@@ -8,6 +8,6 @@ export const validate =
       req[property] = parsedData;
       next();
     } catch (error) {
-      throw new AppError(error.issues[0].message, 400);
+      return next(new AppError(error.issues[0].message, 400));
     }
   };

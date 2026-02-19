@@ -2,6 +2,9 @@ import os
 import yaml
 from pathlib import Path
 from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
 
 CONFIG_PATH = Path(__file__).resolve().parents[1] / "config" / "model.yaml"
 
@@ -34,8 +37,9 @@ def _groq_call(prompt: str) -> str:
             {
                 "role": "system",
                 "content": (
-                    "You are an expert SQL generator. "
-                    "Return ONLY valid SQLite SQL. No markdown. No explanations."
+                    "You are a precise and accurate AI assistant. "
+                    "Follow the instructions in the prompt strictly. "
+                    "Do not invent information."
                 )
             },
             {

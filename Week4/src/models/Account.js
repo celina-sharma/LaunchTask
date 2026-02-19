@@ -13,8 +13,9 @@ const accountSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true,
+      unique: true,   //no duplicates in email field
       lowercase: true,
+      match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
     },
     password: {
       type: String,
@@ -24,16 +25,16 @@ const accountSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["active", "blocked"],
+      enum: ["active", "blocked","deleted"],
       default: "active",
     },
   },
   {
-    timestamps: true,
+    timestamps: true,  //automatically added createdAt and updatedAt 
   }
 );
 accountSchema.pre("save", async function () {
-  if (!this.isModified("password")) return;
+  if (!this.isModified("password")) return;   //prevents double hashing
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
@@ -42,9 +43,10 @@ accountSchema.pre("save", async function () {
 
 accountSchema.virtual("accountAge").get(function () {
   return Math.floor(
-    (Date.now() - this.createdAt.getTime()) / (1000 * 60 * 60 * 24)
+    (Date.now() - this.createdAt.getTime()) / (1000 * 60 * 60 * 24)  //returning number of days since account creation
   );
 });
+
 
 
 accountSchema.index({ status: 1, createdAt: -1 });

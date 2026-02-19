@@ -62,10 +62,9 @@ models = {
     "XGBoost": XGBClassifier(
         objective="binary:logistic",
         eval_metric="logloss",
-        use_label_encoder=False,
         random_state=42
     ),
-    "NeuralNetwork": MLPClassifier(max_iter=1000, random_state=42)
+    "NeuralNetwork": MLPClassifier(max_iter=2000, random_state=42)
 }
 
 results = {}

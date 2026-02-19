@@ -13,5 +13,5 @@ export const createProductSchema = z.object({
   tags: z
     .array(z.string().min(2))
     .max(10)
-    .optional(),
-});
+    .optional(),   
+}).strict();

@@ -8,5 +8,3 @@ src/data/embeddings/*.npy
 
 logs/
 *.log
-
-src/config/model.yaml

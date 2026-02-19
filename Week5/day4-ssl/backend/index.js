@@ -2,7 +2,7 @@ import express from "express";
 
 const app = express();
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     message: "Secure API response",
     container: process.env.HOSTNAME

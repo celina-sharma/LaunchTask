@@ -1,37 +1,37 @@
 [
   {
-    "timestamp": "2026-02-08T08:13:53.944083",
+    "timestamp": "2026-02-11T12:39:58.560561",
     "endpoint": "/ask-image",
-    "question": "What is this image explaining",
-    "answer": "This image appears to be a breakdown of the types of properties in a certain area or market as of December 31, 2022. It lists the percentages of different property types, including Office, Hotel, Self-Storage, Multifamily, and Retail. The percentages add up to 100% (although there is a small discrepancy due to the missing values), suggesting that this is a comprehensive categorization of the properties in the area.",
-    "confidence": 0.159
+    "question": "What percentage is Northeast region?",
+    "answer": "To determine the percentage of the Northeast region, we need to extract the exact value from the provided OCR text.\n\nFrom Image 2:\nNortheast 12.2%\n\nFrom Image 3:\nNortheast 12.2%\n\nBoth images show the same value for the Northeast region.\n\nThe exact value is: 12.2%\n\nSince both values are the same, the conclusion is:\nThe Northeast region is 12.2%.",
+    "confidence": 0.295
   },
   {
-    "timestamp": "2026-02-08T10:37:12.216646",
+    "timestamp": "2026-02-11T12:40:35.395257",
+    "endpoint": "/ask-image",
+    "question": "Which region has the highest percentage?",
+    "answer": "To determine which region has the highest percentage, we need to extract the exact values from the provided images.\n\nFrom Image 1:\n- Mid Atlantic: 924%\n- Northeast: 12.2%\n- Mountain: 8.3%\n- West North: 16.2%\n- Central (East North): 6.1%\n- Southwest: 23.2%\n\nFrom Image 2:\n- Mid Atlantic: 924%\n- Northeast: 12.2%\n- Mountain: 8.3%\n- West North: 16.2%\n- Central (East North): 6.1%\n- Southwest: 23.2%\n\nFrom Image 3:\n- Mid Atlantic: 947%\n- Northeast: 12.2%\n- Mountain: 8.3%\n- West North: 16.2%\n- Central (East North): 6.1%\n- Southwest: 23.2%\n\nComparing the exact values, we can see that:\n- Mid Atlantic has 924% in Image 1 and Image 2, and 947% in Image 3.\n- Southwest has 23.2% in all three images.\n- West North has 16.2% in all three images.\n- Northeast has 12.2% in all three images.\n- Mountain has 8.3% in all three images.\n- Central (East North) has 6.1% in all three images.\n\nThe highest percentage is 947% in Mid Atlantic from Image 3.",
+    "confidence": 0.469
+  },
+  {
+    "timestamp": "2026-02-11T12:42:17.510071",
     "endpoint": "/ask",
-    "question": "What is RAG?",
-    "answer": "SELECT 'RAG stands for Retrieval-Augmented Generation to reduce hallucinations.'",
-    "confidence": 0.374
+    "question": "Who won the fifa world cup of 2018?",
+    "answer": "Insufficient information in context.",
+    "confidence": 0.156
   },
   {
-    "timestamp": "2026-02-08T10:39:14.221893",
-    "endpoint": "/ask-image",
-    "question": "Explain what this diagram represents",
-    "answer": "Unfortunately, the provided information is incomplete and does not provide enough context to accurately explain what the diagram represents. There are multiple images with different captions, but the OCR text for the third image is missing, which is likely to be the most relevant for understanding the diagram.\n\nHowever, based on the first two images, it appears to be related to a digital security system, possibly involving device sensors, a cloud service, and a network. The third image, which is a diagram of the rear suspension, seems unrelated to the digital security system.\n\nTo provide a more accurate explanation, I would need more information about the diagram, such as the OCR text for the third image or a description of the diagram itself.",
-    "confidence": 0.279
-  },
-  {
-    "timestamp": "2026-02-08T10:42:02.569449",
-    "endpoint": "/ask-image",
-    "question": "Explain what this diagram represents",
-    "answer": "This diagram appears to be a collection of three separate charts or graphs, each showing different types of data.\n\nThe first chart is a bar chart showing the estimated mobile ad spend forecast from 2022 to 2026, with the values in billions of dollars. It shows a gradual increase in mobile ad spend over the years.\n\nThe second chart is a comparison of the cumulative total return of three different investment indices: NextNav Inc., the S&P 500 Index, and the S&P Information Technology Index. The chart shows the cumulative total return over time, with the S&P Information Technology Index performing the best.\n\nThe third chart is a comparison of the 5-year cumulative total return of three different investment indices: ACRES Commercial Realty Corp., the Russell 2000 Index, and the FTSE NAREIT All REITs Index. The chart shows the cumulative total return over time, with ACRES Commercial Realty Corp. performing the best.\n\nOverall, this diagram appears to be a collection of charts showing different types of financial data, including mobile ad spend forecasts and investment index performance.",
-    "confidence": 0.525
-  },
-  {
-    "timestamp": "2026-02-08T11:42:45.337591",
+    "timestamp": "2026-02-11T12:57:52.983482",
     "endpoint": "/ask",
-    "question": "What is RAG?",
-    "answer": "SELECT * FROM documents WHERE status = 'RAG'",
-    "confidence": 0.281
+    "question": "Who won fifa world cup of 2018?",
+    "answer": "Insufficient information in context.",
+    "confidence": 0.157
+  },
+  {
+    "timestamp": "2026-02-11T12:59:30.125342",
+    "endpoint": "/ask",
+    "question": "Who won fifa world cup?",
+    "answer": "Insufficient information in context.",
+    "confidence": 0.0
   }
 ]

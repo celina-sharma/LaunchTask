@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
@@ -9,21 +9,34 @@ const orderSchema = new mongoose.Schema(
       index: true,
     },
 
-    amount: {
+    products: [
+  {
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: true
+    },
+    quantity: {
       type: Number,
       required: true,
-      min: 0,
+      min: 1
     },
+    price: {
+      type: Number,
+      required: true
+      }
+    }
+  ],
 
     status: {
-      type: String,
-      enum: ["pending", "completed", "cancelled"],
-      default: "pending",
-      index: true,
+    type: String,
+    enum: ["pending", "completed", "cancelled"],      
+    default: "pending",
+    index: true,
     },
 
     deliveredAt: {
-      type: Date,
+      type: Date,  
     },
   },
   {
@@ -38,5 +51,5 @@ orderSchema.index(
   { expireAfterSeconds: 60 * 60 * 24 * 90 }  // TTL index (auto-delete after 90 days)
 );
 
-const Order = mongoose.model("Order",orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 export default Order;

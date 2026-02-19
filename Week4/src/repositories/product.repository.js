@@ -20,7 +20,7 @@ class ProductRepository {
     const query = {};
 
     // Soft delete handling
-    if (!includeDeleted) {
+    if (includeDeleted !== "true") {
       query.deletedAt = null;
     }
 

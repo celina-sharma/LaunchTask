@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-console.log("Vivek");
 const app = express();
 mongoose.connect("mongodb://mongo:27017/day2db")
 .then(() => console.log("Connected to MongoDB"))

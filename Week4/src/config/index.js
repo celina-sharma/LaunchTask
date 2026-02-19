@@ -11,5 +11,5 @@ dotenv.config({
 export default({
     env,
     port: process.env.PORT,
-    dbUrl: process.env.DB_URL,
+    dbUrl: process.env.MONGO_URI,
 })

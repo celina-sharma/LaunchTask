@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
+import Account from "../models/Account.js";
+import Order from "../models/Order.js";
 import AccountRepository from "../repositories/account.repository.js";
 import OrderRepository from "../repositories/order.repository.js";
 
-await mongoose.connect("mongodb://localhost:27017/week4test");
+
+try{
+await mongoose.connect("mongodb://localhost:27017/week4_day1");
+// await Order.deleteMany({});
+// await Account.deleteMany({});
 
 const acc1 = await AccountRepository.create({
   name: "Alice",
@@ -37,3 +43,8 @@ await OrderRepository.create({
 
 console.log("Seed data inserted");
 process.exit(0);
+} catch(err) {
+  console.log(err);
+  process.exit(1);
+  
+}

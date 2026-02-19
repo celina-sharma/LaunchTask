@@ -2,14 +2,14 @@ module.exports = {
   apps: [
     {
       name: "week4-api",
-      cwd: "/home/celinasharma/Desktop/LaunchPad1/Week4/src",
+      cwd: "/home/celinasharma/Desktop/LaunchPad1/LaunchTask/Week4/src",
       script: "index.js",
       instances: 1,
       exec_mode: "fork",
       autorestart: true,
       watch: false,
       env: {
-        NODE_ENV: "development",
+        NODE_ENV: "local",
         PORT: 5000
       },
       env_production: {
@@ -19,7 +19,7 @@ module.exports = {
     },
     {
       name: "email-worker",
-      cwd: "/home/celinasharma/Desktop/LaunchPad1/Week4/src",
+      cwd: "/home/celinasharma/Desktop/LaunchPad1/LaunchTask/Week4/src",
       script: "workers/email.worker.js",
       instances: 1,
       exec_mode: "fork",

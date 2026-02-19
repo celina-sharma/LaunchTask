@@ -19,7 +19,7 @@ The server starts only when all critical dependencies are ready.
 ---
 
 ## Configuration
-A centralized config loader dynamically loads `.env.local`, `.env.dev`, or `.env.prod` based on `NODE_ENV`. Configuration is exposed through a single config object, avoiding direct use of `process.env`.
+A centralized config loader dynamically loads `.env.local` based on `NODE_ENV`. Configuration is exposed through a single config object, avoiding direct use of `process.env`.
 
 ---
 

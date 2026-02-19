@@ -7,6 +7,6 @@ export function requestTracing(req, res, next) {
   req.requestId = requestId;
   req.log = logger.child({ requestId });
 
-  res.setHeader("X-Request-ID", requestId);
+  res.setHeader("X-Request-ID", requestId); //name and value
   next();
 }

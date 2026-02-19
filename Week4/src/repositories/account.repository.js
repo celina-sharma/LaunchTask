@@ -1,4 +1,5 @@
 import Account from "../models/Account.js";
+import bcrypt from "bcrypt";
 
 class AccountRepository {
   static async create(data) {
@@ -10,27 +11,36 @@ class AccountRepository {
   }
 
   static async findPaginated({ status, limit = 10, cursor }) {
-    const query = {};
+    const query = {status: {$ne: "deleted"}};
 
     if (status) {
       query.status = status;
     }
 
     if (cursor) {
-      query._id = { $lt: cursor };
-    }
+      query.createdAt = { $lt: new Date(cursor) }};
+
 
     return Account.find(query)
-      .sort({ _id: -1 })
+      .sort({createdAt: -1 })
       .limit(limit);
   }
 
   static async update(id, data) {
-    return Account.findByIdAndUpdate(id, data, { new: true });
+    if(data.password){
+      const salt = await bcrypt.genSalt(10);
+      data.password = await bcrypt.hash(data.password,salt);
+    }
+    return Account.findByIdAndUpdate(id, data, { new: true,runValidators: true,    //new:true -> mongodb returns the updated document and the older one,
+
+    });
   }
 
   static async delete(id) {
-    return Account.findByIdAndDelete(id);
+    return Account.findByIdAndUpdate(id,
+      {status: "deleted"},
+      {new: true}
+    );
   }
 }
 

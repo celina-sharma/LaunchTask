@@ -1,16 +1,12 @@
 import express from "express";
-import {
-  getProducts,
-  deleteProduct,
-} from "../controllers/product.controller.js";
 import { validate } from "../middlewares/validate.js";
 import { createProductSchema } from "../validators/product.schema.js";
 import * as productController from "../controllers/product.controller.js";
 import { enqueueEmailJob } from "../jobs/email.job.js";
 const router = express.Router();
 
-router.get("/", getProducts);
-router.delete("/:id", deleteProduct);
+router.get("/", productController.getProducts);
+router.delete("/:id", productController.deleteProduct);
 router.post(
   "/",
   validate(createProductSchema),

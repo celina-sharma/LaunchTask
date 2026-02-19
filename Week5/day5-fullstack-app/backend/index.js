@@ -19,7 +19,7 @@ app.get('/api/messages', async (req, res) => {
 });
 
 app.post('/api/messages', async (req, res) => {
-  const newMessage = new Message({ text: req.body.text });
+  const newMessage = new Message({ text: reqmy.body.text });
   await newMessage.save();
   res.status(201).json(newMessage);
 });

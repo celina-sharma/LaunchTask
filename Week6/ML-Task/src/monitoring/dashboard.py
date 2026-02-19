@@ -3,9 +3,9 @@ import requests
 
 #Config
 st.set_page_config(page_title="Titanic Survival Prediction", layout="centered")
-API_URL = "http://localhost:8001/predict"
+API_URL = "http://localhost:8000/predict"
 
-st.title("🚢 Titanic Survival Prediction")
+st.title("Titanic Survival Prediction")
 st.write("Enter passenger details and predict survival probability")
 
 # UI Inputs

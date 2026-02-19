@@ -14,3 +14,27 @@
 2026-01-28 15:54:07,526 - INFO - Cleaned data shape: (775, 11)
 2026-01-28 15:54:07,526 - INFO - Saving cleaned dataset to data/processed/final.csv
 2026-01-28 15:54:07,530 - INFO - Data pipeline completed successfully
+2026-02-11 03:53:59,238 - INFO - Data pipeline started
+2026-02-11 03:53:59,238 - INFO - Loading raw Titanic dataset
+2026-02-11 03:53:59,242 - INFO - Raw data shape: (891, 12)
+2026-02-11 03:53:59,242 - INFO - Starting data cleaning
+2026-02-11 03:53:59,251 - INFO - Data cleaning completed
+2026-02-11 03:53:59,251 - INFO - Cleaned data shape: (775, 11)
+2026-02-11 03:53:59,251 - INFO - Saving cleaned dataset to data/processed/final.csv
+2026-02-11 03:53:59,254 - INFO - Data pipeline completed successfully
+2026-02-11 04:23:53,326 - INFO - Data pipeline started
+2026-02-11 04:23:53,326 - INFO - Loading raw Titanic dataset
+2026-02-11 04:23:53,329 - INFO - Raw data shape: (891, 12)
+2026-02-11 04:23:53,329 - INFO - Starting data cleaning
+2026-02-11 04:23:53,332 - INFO - Data cleaning completed
+2026-02-11 04:23:53,332 - INFO - Cleaned data shape: (775, 11)
+2026-02-11 04:23:53,332 - INFO - Saving cleaned dataset to data/processed/final.csv
+2026-02-11 04:23:53,343 - INFO - Data pipeline completed successfully
+2026-02-17 12:59:44,787 - INFO - Data pipeline started
+2026-02-17 12:59:44,796 - INFO - Loading raw Titanic dataset
+2026-02-17 12:59:44,801 - INFO - Raw data shape: (891, 12)
+2026-02-17 12:59:44,801 - INFO - Starting data cleaning
+2026-02-17 12:59:44,807 - INFO - Data cleaning completed
+2026-02-17 12:59:44,808 - INFO - Cleaned data shape: (775, 11)
+2026-02-17 12:59:44,808 - INFO - Saving cleaned dataset to data/processed/final.csv
+2026-02-17 12:59:44,814 - INFO - Data pipeline completed successfully

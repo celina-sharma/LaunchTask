@@ -21,11 +21,10 @@ if mode == "Text (RAG)":
     st.subheader("Text Question Answering")
 
     question = st.text_input("Enter your question")
-    context = st.text_area("Context (retrieved text / docs)")
 
     if st.button("Ask"):
-        if question and context:
-            result = ask(question, context)
+        if question:
+            result = ask(question)
 
             st.markdown("Answer")
             st.write(result["answer"])
@@ -33,34 +32,35 @@ if mode == "Text (RAG)":
             st.markdown("Evaluation")
             st.json(result["evaluation"])
         else:
-            st.warning("Please provide both question and context.")
+            st.warning("Please enter a question.")
+
+
 
 elif mode == "Image → Text (Image RAG)":
-    st.subheader("Image Understanding")
+    st.subheader("Image Question Answering")
 
-    image_path = st.text_input("Image path")
-    question = st.text_input("Question about the image")
+    question = st.text_input("Ask about images in documents")
 
-    if image_path:
-        try:
-            st.image(image_path, caption="Input Image", use_column_width=True)
-        except:
-            st.warning("Unable to display image. Check path.")
-
-    if st.button("Analyze Image"):
-        if image_path and question:
-            result = ask_image(image_path, question)
+    if st.button("Analyze"):
+        if question:
+            result = ask_image(question)
 
             st.markdown("Answer")
             st.write(result["answer"])
 
             st.markdown("Evaluation")
             st.json(result["evaluation"])
+
+            st.markdown("Retrieved Images")
+            for path in result["retrieved_images"]:
+                st.image(path)
         else:
-            st.warning("Please provide image path and question.")
+            st.warning("Enter a question.")
+
+
 
 elif mode == "SQL Question Answering":
-    st.subheader("SQL Question Answering")
+    st.subheader("SQL QA")
 
     question = st.text_input("Enter SQL question")
 
@@ -74,4 +74,4 @@ elif mode == "SQL Question Answering":
             st.markdown("Result")
             st.json(result["result"])
         else:
-            st.warning("Please enter a question.")
+            st.warning("Enter a question.")

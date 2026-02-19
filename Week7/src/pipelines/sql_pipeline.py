@@ -5,6 +5,7 @@ from utils.result_summarizer import summarize_result
 
 def run_sql_pipeline(question: str):
     sql = generate_sql(question)
+    print("Generated SQL:", sql)
     sql = validate_sql(sql) 
     results = execute_sql(sql)
     summary = summarize_result(results)

@@ -4,23 +4,29 @@ from evaluation.rag_eval import evaluate_answer
 from memory.memory_store import save_interaction
 
 
-def ask_image(image_path: str, question: str):
+def ask_image(question: str):
+
     retriever = ImageRetriever()
 
-    #retrieve similar images
-    results = retriever.search_by_image(image_path, top_k=3)
-    top_image = results[0]
+    # Combine question-based search for relevance
+    results = retriever.search(question, top_k=3)
 
-    context = ""
-    for r in results:
-        context += f"""
-    Caption: {r.get('caption','')}
-    OCR: {r.get('ocr_text','')}
-    """
+    context_blocks = []
 
+    for i, r in enumerate(results, 1):
+        block = f"""
+Image {i}:
+Source: {r.get('source_pdf')}
+Page: {r.get('page')}
+Caption: {r.get('caption','')}
+OCR Extracted Text:
+{r.get('ocr_text','')}
+"""
+        context_blocks.append(block)
+
+    context = "\n\n".join(context_blocks)
 
     answer = generate_answer(question, context, mode="image")
-
 
     evaluation = evaluate_answer(question, context, answer)
 
@@ -32,7 +38,7 @@ def ask_image(image_path: str, question: str):
     )
 
     return {
-        "image": top_image["image_path"],
         "answer": answer,
-        "evaluation": evaluation
+        "evaluation": evaluation,
+        "retrieved_images": [r["image_path"] for r in results]
     }

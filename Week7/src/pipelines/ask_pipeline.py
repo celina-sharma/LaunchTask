@@ -1,37 +1,57 @@
 # src/pipelines/ask_pipeline.py
 
-from evaluation.rag_eval import evaluate_answer
-from memory.memory_store import save_interaction, get_recent_memory
-from generator.llm_answer import generate_answer   # text RAG answer
+from src.retriever.hybrid_retriever import HybridRetriever
+from src.pipelines.context_builder import build_context_json
+from src.generator.llm_answer import generate_answer
+from src.evaluation.rag_eval import evaluate_answer
+from src.memory.memory_store import save_interaction
 
 CONFIDENCE_THRESHOLD = 0.4
+retriever = HybridRetriever()
 
-def ask(question: str, context: str):
-    # 1. initial answer
-    answer = generate_answer(question, context)
 
-    # 2. evaluate
-    eval_scores = evaluate_answer(question, context, answer)
+def format_context(context_json):
+    sections = []
+    for item in context_json["contexts"]:
+        sections.append(
+            f"[Source: {item['source']}]\n{item['text']}\n"
+        )
+    return "\n\n".join(sections)
+
+
+def ask(question: str):
+
+    # ---- Retrieval ----
+    chunks = retriever.search(question)
+
+    # ---- Build structured context ----
+    context_json = build_context_json(chunks, question)
+
+    # ---- Convert to string for LLM ----
+    context_string = format_context(context_json)
+
+    # ---- Generation ----
+    answer = generate_answer(question, context_string)
+
+    # ---- Evaluation ----
+    eval_scores = evaluate_answer(question, context_string, answer)
 
     refined = False
 
-    # 3. refinement loop (single pass)
     if eval_scores["hallucination"] or eval_scores["confidence"] < CONFIDENCE_THRESHOLD:
         critique_prompt = f"""
         Improve the following answer.
         Use ONLY the given context.
         Question: {question}
-        Context: {context}
+        Context: {context_string}
         Original Answer: {answer}
         """
 
-        answer = generate_answer(critique_prompt, context)
+        answer = generate_answer(critique_prompt, context_string)
         refined = True
+        eval_scores = evaluate_answer(question, context_string, answer)
 
-        # re-evaluate after refinement
-        eval_scores = evaluate_answer(question, context, answer)
-
-    # 4. save memory
+    # ---- Memory Save ----
     save_interaction(
         endpoint="/ask",
         question=question,
@@ -43,5 +63,6 @@ def ask(question: str, context: str):
         "question": question,
         "answer": answer,
         "refined": refined,
-        "evaluation": eval_scores
+        "evaluation": eval_scores,
+        "context_used": context_json
     }

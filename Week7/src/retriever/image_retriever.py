@@ -17,12 +17,11 @@ class ImageRetriever:
             self.data = json.load(f)
 
         self.image_embeddings = np.array(
-            [d["image_embedding"] for d in self.data],
+            [d["text_embedding"] for d in self.data],
             dtype="float32"
         )
 
     def search(self, query: str, top_k: int = 5):
-        #enco
         query_embedding = self.model.encode(
             query,
             normalize_embeddings=True

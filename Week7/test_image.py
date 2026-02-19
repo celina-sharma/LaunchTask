@@ -1,4 +1,4 @@
-from retriever.image_retriever import ImageRetriever
+from src.retriever.image_retriever import ImageRetriever
 
 QUERY_IMAGE = "src/data/images/report5/page_49_img_1.png"
 

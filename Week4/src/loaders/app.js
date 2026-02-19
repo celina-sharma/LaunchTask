@@ -1,6 +1,8 @@
 import express from "express";
 import logger from "../utils/logger.js";
 import productRoutes from "../routes/product.route.js";
+import accountRoutes from "../routes/account.route.js"
+import orderRoutes from "../routes/order.route.js"
 import { errorHandler } from "../middlewares/error.middleware.js";
 import { securityMiddleware } from "../middlewares/security.js";
 import { requestTracing } from "../utils/tracing.js";
@@ -21,7 +23,14 @@ export default function loadApp() {
   app.get("/health", (req, res) => {
     res.status(200).json({ status: "OK" });
   });
-  logger.info("Routes mounted: health check");
+  logger.info("Routes mounted: health check"
+);
+
+  app.use("/accounts", accountRoutes);
+  logger.info("Routes mounted: accounts");
+
+  app.use("/orders",orderRoutes);
+  logger.info("Routes mounted: orders");
 
   app.use("/products", productRoutes);
   logger.info("Routes mounted: products");

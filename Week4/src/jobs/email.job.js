@@ -6,7 +6,7 @@ export async function sendEmailJob(payload) {
     { email: payload.email },
     "Email job started"
   );
-
+  // throw new Error("SMTP service donw");  retry
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   logger.info(
@@ -17,7 +17,7 @@ export async function sendEmailJob(payload) {
 }
 
 export async function enqueueEmailJob(data , requestId) {
-  await emailQueue.add(
+  const job = await emailQueue.add(
     "send-email",   // job name
     data,           // payload
     {
@@ -27,5 +27,12 @@ export async function enqueueEmailJob(data , requestId) {
         delay: 3000
       }
     }
+  );
+  logger.info({
+    jobId: job.id,
+    requestId,
+    email: data.email,
+  },
+"Email job enqueued"
   );
 }
