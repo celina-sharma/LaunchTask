@@ -1,0 +1,4 @@
+Model,Tokens/sec,VRAM,Latency,Accuracy
+Base,10.51,4.0,3.71,Good
+Fine-tuned,20.31,4.0,1.92,Best
+GGUF,7.33,N/A,12.55,Mixed
