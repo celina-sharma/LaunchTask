@@ -1,0 +1,12 @@
+FROM python:3.12
+
+WORKDIR /app
+
+COPY deploy/ ./deploy/
+
+RUN pip install fastapi uvicorn llama-cpp-python streamlit requests
+
+EXPOSE 8000
+EXPOSE 8501
+
+CMD ["uvicorn", "deploy.app:app", "--host", "0.0.0.0", "--port", "8000"]
