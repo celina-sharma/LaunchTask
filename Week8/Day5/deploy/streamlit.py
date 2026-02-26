@@ -1,5 +1,3 @@
-# streamlit_app.py - Streamlit UI for Local LLM API
-
 import streamlit as st
 import requests
 
@@ -18,9 +16,6 @@ st.caption("Powered by TinyLlama GGUF model")
 mode = st.radio("Select Mode", ["Chat", "Generate"], horizontal=True)
 st.divider()
 
-# ─────────────────────────────────────────
-# Sidebar settings
-# ─────────────────────────────────────────
 st.sidebar.title("⚙️ Settings")
 
 
@@ -39,9 +34,6 @@ if st.sidebar.button("🗑️ Clear Chat"):
     st.session_state.messages = []
     st.rerun()
 
-# ─────────────────────────────────────────
-# Generate Mode
-# ─────────────────────────────────────────
 if mode == "Generate":
     st.subheader("Generate Mode")
 
@@ -70,9 +62,7 @@ if mode == "Generate":
         else:
             st.warning("Please enter a prompt!")
 
-# ─────────────────────────────────────────
-# Chat Mode
-# ─────────────────────────────────────────
+
 elif mode == "Chat":
     st.subheader("Chat Mode")
     st.caption("Multi-turn conversation with history.")

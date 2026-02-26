@@ -16,5 +16,4 @@ TOP_P = 0.95
 # Chat settings
 SYSTEM_PROMPT = "You are a helpful assistant."
 
-# Logging settings
 LOG_LEVEL = "INFO"
