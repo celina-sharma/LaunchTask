@@ -1,6 +1,5 @@
 import autogen
 
-# Connecting to Phi-3 running locally via Ollama
 config_list = [
     {
         "model": "phi3",

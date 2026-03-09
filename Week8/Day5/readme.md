@@ -46,7 +46,7 @@ Server runs on: http://localhost:8000
 ### Step 2 — Start Streamlit UI:
 ```bash
 cd Day5/deploy
-streamlit run streamlit_app.py
+streamlit run streamlit.py
 ```
 UI runs on: http://localhost:8501
 

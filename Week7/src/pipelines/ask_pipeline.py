@@ -1,5 +1,3 @@
-# src/pipelines/ask_pipeline.py
-
 from src.retriever.hybrid_retriever import HybridRetriever
 from src.pipelines.context_builder import build_context_json
 from src.generator.llm_answer import generate_answer

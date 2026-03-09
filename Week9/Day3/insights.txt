@@ -1,0 +1,7 @@
+Top 5 Sales Insights from sales.csv
+========================================
+1. Top selling product: Laptop with total sales of $48400.00
+2. Region with highest sales: North with total sales of $33385.00
+3. Most used payment method: Card
+4. Best selling month: April 2024 with total sales of $41250.00
+5. Top selling category: Electronics with total sales of $98810.00
