@@ -1,37 +1,37 @@
 [
   {
-    "timestamp": "2026-02-11T12:39:58.560561",
-    "endpoint": "/ask-image",
-    "question": "What percentage is Northeast region?",
-    "answer": "To determine the percentage of the Northeast region, we need to extract the exact value from the provided OCR text.\n\nFrom Image 2:\nNortheast 12.2%\n\nFrom Image 3:\nNortheast 12.2%\n\nBoth images show the same value for the Northeast region.\n\nThe exact value is: 12.2%\n\nSince both values are the same, the conclusion is:\nThe Northeast region is 12.2%.",
-    "confidence": 0.295
+    "timestamp": "2026-02-11T12:59:30.125342",
+    "endpoint": "/ask",
+    "question": "Who won fifa world cup?",
+    "answer": "Insufficient information in context.",
+    "confidence": 0.0
   },
   {
-    "timestamp": "2026-02-11T12:40:35.395257",
+    "timestamp": "2026-03-10T07:21:57.510236",
+    "endpoint": "/ask",
+    "question": "What is RAG?",
+    "answer": "Insufficient information in context.",
+    "confidence": 0.0
+  },
+  {
+    "timestamp": "2026-03-10T07:23:00.256412",
     "endpoint": "/ask-image",
     "question": "Which region has the highest percentage?",
     "answer": "To determine which region has the highest percentage, we need to extract the exact values from the provided images.\n\nFrom Image 1:\n- Mid Atlantic: 924%\n- Northeast: 12.2%\n- Mountain: 8.3%\n- West North: 16.2%\n- Central (East North): 6.1%\n- Southwest: 23.2%\n\nFrom Image 2:\n- Mid Atlantic: 924%\n- Northeast: 12.2%\n- Mountain: 8.3%\n- West North: 16.2%\n- Central (East North): 6.1%\n- Southwest: 23.2%\n\nFrom Image 3:\n- Mid Atlantic: 947%\n- Northeast: 12.2%\n- Mountain: 8.3%\n- West North: 16.2%\n- Central (East North): 6.1%\n- Southwest: 23.2%\n\nComparing the exact values, we can see that:\n- Mid Atlantic has 924% in Image 1 and Image 2, and 947% in Image 3.\n- Southwest has 23.2% in all three images.\n- West North has 16.2% in all three images.\n- Northeast has 12.2% in all three images.\n- Mountain has 8.3% in all three images.\n- Central (East North) has 6.1% in all three images.\n\nThe highest percentage is 947% in Mid Atlantic from Image 3.",
     "confidence": 0.469
   },
   {
-    "timestamp": "2026-02-11T12:42:17.510071",
+    "timestamp": "2026-03-10T07:25:29.763714",
     "endpoint": "/ask",
-    "question": "Who won the fifa world cup of 2018?",
-    "answer": "Insufficient information in context.",
-    "confidence": 0.156
+    "question": "What is credit underwriting?",
+    "answer": "Credit underwriting is mentioned in the context as one of the guidelines adopted by the federal banking regulators, relating to internal controls and information systems, internal audit systems, loan documentation, credit underwriting, interest rate exposure, asset growth, and compensation, fees and benefits.",
+    "confidence": 0.556
   },
   {
-    "timestamp": "2026-02-11T12:57:52.983482",
-    "endpoint": "/ask",
-    "question": "Who won fifa world cup of 2018?",
-    "answer": "Insufficient information in context.",
-    "confidence": 0.157
-  },
-  {
-    "timestamp": "2026-02-11T12:59:30.125342",
-    "endpoint": "/ask",
-    "question": "Who won fifa world cup?",
-    "answer": "Insufficient information in context.",
-    "confidence": 0.0
+    "timestamp": "2026-03-10T07:26:26.396738",
+    "endpoint": "/ask-image",
+    "question": "src/data/images/report5/page_49_img_1.png",
+    "answer": "Insufficient information in retrieved images.\n\nThere is no image provided with the filename src/data/images/report5/page_49_img_1.png.",
+    "confidence": 0.267
   }
 ]

@@ -1,284 +1,255 @@
 import os
-import logging
+import sys
+import shutil
 import datetime
-from config import LLM_CONFIG, GROQ_API_KEY, GROQ_MODEL, LOG_FILE, LOG_DIR, MAX_RETRIES
 
-# LOGGING SETUP
-os.makedirs(LOG_DIR, exist_ok=True)
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+sys.path.append(os.path.dirname(__file__))
+
+from config import LOG_DIR, OUTPUTS_DIR, MAX_RETRIES, token_usage
+from tools import log
+from agents import (
+    orchestrator,
+    planner,
+    researcher,
+    coder,
+    analyst,
+    critic,
+    optimizer,
+    validator,
+    reporter
 )
 
-def log(agent, message):
-    """Log agent activity"""
-    log_message = f"[{agent}] {message}"
-    print(log_message)
-    logging.info(log_message)
+# outputs folder management
+def prepare_outputs_folder():
+    if os.path.exists(OUTPUTS_DIR):
+        shutil.rmtree(OUTPUTS_DIR)
+    os.makedirs(OUTPUTS_DIR)
+    log("SYSTEM", "outputs folder ready")
 
+# confidence report
+def print_confidence_report(confidence):
+    print("-" * 60)
+    print("CONFIDENCE REPORT")
+    print("-" * 60)
+    for agent, status in confidence.items():
+        padded = agent.ljust(15)
+        print(f"  {padded} : {status}")
+    print("-" * 60)
 
-from groq import Groq
-
-client = Groq(api_key=GROQ_API_KEY)
-
-def call_llm(prompt, retries=MAX_RETRIES):
-    """Call Groq LLM with failure recovery"""
-    for attempt in range(retries):
-        try:
-            response = client.chat.completions.create(
-                model=GROQ_MODEL,
-                messages=[
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.3,
-            )
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            log("SYSTEM", f"Attempt {attempt + 1} failed: {e}")
-            if attempt == retries - 1:
-                return f"Error: Failed after {retries} attempts"
-    return None
-
-
-# AGENTS
-def orchestrator(task):
-    """Orchestrator - manages all agents and assigns tasks"""
-    log("Orchestrator", f"Received task: {task}")
-    prompt = f"""You are the Orchestrator of NEXUS AI system.
-You received this task: {task}
-
-Your job:
-1. Understand the task
-2. Break it into subtasks
-3. Assign each subtask to the right agent
-
-Available agents: Planner, Researcher, Coder, Analyst, Critic, Optimizer, Validator, Reporter
-
-Return a clear plan of which agent should do what.
-Keep it concise.
-"""
-    result = call_llm(prompt)
-    log("Orchestrator", f"Plan created: {result}")
-    return result
-
-
-def planner(task, orchestrator_plan):
-    """Planner - creates detailed multi-step plan"""
-    log("Planner", "Creating detailed plan...")
-    prompt = f"""You are the Planner of NEXUS AI system.
-Task: {task}
-Orchestrator plan: {orchestrator_plan}
-
-Your job:
-Create a detailed step-by-step plan to solve this task.
-Number each step clearly.
-Keep it concise and actionable.
-"""
-    result = call_llm(prompt)
-    log("Planner", f"Plan: {result}")
-    return result
-
-
-def researcher(task, plan):
-    """Researcher - researches the topic"""
-    log("Researcher", "Researching topic...")
-    prompt = f"""You are the Researcher of NEXUS AI system.
-Task: {task}
-Plan: {plan}
-
-Your job:
-Research and gather relevant information about this task.
-Provide key facts, insights and relevant knowledge.
-Keep it concise and relevant.
-"""
-    result = call_llm(prompt)
-    log("Researcher", f"Research: {result}")
-    return result
-
-
-def coder(task, research):
-    """Coder - writes and executes code if needed"""
-    log("Coder", "Writing code...")
-    prompt = f"""You are the Coder of NEXUS AI system.
-Task: {task}
-Research: {research}
-
-Your job:
-If this task requires code, write clean Python code to solve it.
-If no code is needed, explain why and provide a technical solution instead.
-Keep it concise.
-"""
-    result = call_llm(prompt)
-    log("Coder", f"Code: {result}")
-    return result
-
-
-def analyst(task, research, code):
-    """Analyst - analyzes results"""
-    log("Analyst", "Analyzing results...")
-    prompt = f"""You are the Analyst of NEXUS AI system.
-Task: {task}
-Research: {research}
-Code/Solution: {code}
-
-Your job:
-Analyze all the information and provide key insights.
-Identify patterns, strengths and weaknesses.
-Keep it concise.
-"""
-    result = call_llm(prompt)
-    log("Analyst", f"Analysis: {result}")
-    return result
-
-
-def critic(task, analysis):
-    """Critic - reviews and critiques the work"""
-    log("Critic", "Reviewing work...")
-    prompt = f"""You are the Critic of NEXUS AI system.
-Task: {task}
-Analysis: {analysis}
-
-Your job:
-Review the work done and identify:
-1. What is good
-2. What needs improvement
-3. What is missing
-Be constructive and specific.
-Keep it concise.
-"""
-    result = call_llm(prompt)
-    log("Critic", f"Critique: {result}")
-    return result
-
-
-def optimizer(task, analysis, critique):
-    """Optimizer - improves based on critic feedback"""
-    log("Optimizer", "Optimizing solution...")
-    prompt = f"""You are the Optimizer of NEXUS AI system.
-Task: {task}
-Analysis: {analysis}
-Critique: {critique}
-
-Your job:
-Based on the critique, improve and optimize the solution.
-Address all the issues raised by the Critic.
-Keep it concise.
-"""
-    result = call_llm(prompt)
-    log("Optimizer", f"Optimized solution: {result}")
-    return result
-
-
-def validator(task, optimized_solution):
-    """Validator - validates the final solution"""
-    log("Validator", "Validating solution...")
-    prompt = f"""You are the Validator of NEXUS AI system.
-Task: {task}
-Optimized solution: {optimized_solution}
-
-Your job:
-Validate if this solution:
-1. Solves the original task
-2. Is complete and correct
-3. Is ready for production
-
-Return: VALID or INVALID with reasons.
-Keep it concise.
-"""
-    result = call_llm(prompt)
-    log("Validator", f"Validation: {result}")
-    return result
-
-
-def reporter(task, plan, research, analysis, optimized_solution, validation):
-    """Reporter - generates final report"""
-    log("Reporter", "Generating final report...")
-    prompt = f"""You are the Reporter of NEXUS AI system.
-Task: {task}
-
-Generate a clear final report with:
-1. Task Summary
-2. Plan
-3. Key Research Findings
-4. Analysis
-5. Final Solution
-6. Validation Status
-
-Use this information:
-Plan: {plan}
-Research: {research}
-Analysis: {analysis}
-Solution: {optimized_solution}
-Validation: {validation}
-
-Keep it clear and professional.
-"""
-    result = call_llm(prompt)
-    log("Reporter", f"Report generated")
-    return result
-
-
-# MAIN PIPELINE
+# main pipeline
 def run_nexus_ai(task):
-    """Run the full NEXUS AI pipeline"""
-    print("\n" + "=" * 60)
+    start_time = datetime.datetime.now()
+
+    print("-" * 60)
     print("NEXUS AI - Autonomous Multi-Agent System")
-    print("=" * 60)
+    print("-" * 60)
     print(f"Task: {task}")
-    print("=" * 60 + "\n")
+    print("-" * 60)
 
-    log("SYSTEM", f"Starting NEXUS AI for task: {task}")
+    log("SYSTEM", f"Task started: {task}")
 
-    # Step 1: Orchestrator
-    orchestrator_plan = orchestrator(task)
+    # prepare fresh outputs folder
+    prepare_outputs_folder()
 
-    # Step 2: Planner
-    detailed_plan = planner(task, orchestrator_plan)
+    # confidence tracking
+    confidence = {}
 
-    # Step 3: Researcher
-    research = researcher(task, detailed_plan)
+    # step 1 - orchestrator
+    orchestrator_decision = orchestrator(task)
+    agents_needed = orchestrator_decision["agents_needed"]
+    language = orchestrator_decision["language"]
+    project_folder = orchestrator_decision.get("project_folder", "nexus_output")
+    confidence["Orchestrator"] = f"Confident - {orchestrator_decision['task_summary'][:50]}"
 
-    # Step 4: Coder
-    code_solution = coder(task, research)
+    # step 2 - planner
+    plan = planner(task, orchestrator_decision)
+    if plan.get("steps"):
+        structure_count = len(plan.get("project_structure", []))
+        confidence["Planner"] = f"Confident - {len(plan['steps'])} steps, {structure_count} files planned"
+    else:
+        confidence["Planner"] = "Low - fallback plan used"
 
-    # Step 5: Analyst
-    analysis = analyst(task, research, code_solution)
+    # initialize all outputs
+    research = None
+    code_data = None
+    analysis = None
+    critic_review = None
+    optimized = None
+    validation = None
 
-    # Step 6: Critic
-    critique = critic(task, analysis)
+    # step 3 - researcher
+    if "Researcher" in agents_needed:
+        research = researcher(task, plan, language)
+        if research and research.get("findings") != "No research results found":
+            sources = len(research.get("sources", []))
+            confidence["Researcher"] = f"Confident - {sources} sources found"
+        else:
+            confidence["Researcher"] = "Low - no results found"
+    else:
+        confidence["Researcher"] = "Skipped - not needed for this task"
 
-    # Step 7: Optimizer
-    optimized = optimizer(task, analysis, critique)
+    # step 4 - coder
+    if "Coder" in agents_needed:
+        code_data = coder(task, plan, language, project_folder, research)
+        if code_data and code_data.get("verified"):
+            files_count = len(code_data.get("files", []))
+            confidence["Coder"] = f"Confident - {files_count} files generated"
+        else:
+            confidence["Coder"] = "Low - files not verified"
+    else:
+        confidence["Coder"] = "Skipped - not needed for this task"
 
-    # Step 8: Validator
-    validation = validator(task, optimized)
+    # step 5 - analyst
+    if "Analyst" in agents_needed:
+        analysis = analyst(task, plan, language, research, code_data)
+        if analysis and analysis.get("insights"):
+            confidence["Analyst"] = f"Confident - {len(analysis['insights'])} insights found"
+        else:
+            confidence["Analyst"] = "Low - no insights generated"
+    else:
+        confidence["Analyst"] = "Skipped - not needed for this task"
 
-    # Step 9: Reporter
-    final_report = reporter(task, detailed_plan, research, analysis, optimized, validation)
+    # step 6 - critic
+    critic_review = critic(task, plan, language, code_data, analysis, research)
+    if critic_review:
+        verdict = critic_review.get("verdict", "UNKNOWN")
+        issues = len(critic_review.get("issues", []))
+        confidence["Critic"] = f"Confident - verdict: {verdict}, {issues} issues found"
+    else:
+        confidence["Critic"] = "Low - review failed"
 
-    # Save report
-    report_path = f"logs/report_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
-    with open(report_path, "w") as f:
-        f.write(f"Task: {task}\n\n")
-        f.write(final_report)
+    # step 7 - optimizer + validator retry loop
+    for attempt in range(MAX_RETRIES):
+        optimized = optimizer(task, plan, language, critic_review, code_data, analysis)
 
-    print("\n" + "=" * 60)
-    print("FINAL REPORT:")
-    print("=" * 60)
-    print(final_report)
-    print("\n" + "=" * 60)
-    print(f"Report saved to: {report_path}")
-    print("=" * 60)
+        if "Validator" in agents_needed:
+            validation = validator(task, language, optimized, critic_review)
 
-    log("SYSTEM", "NEXUS AI pipeline complete!")
-    return final_report
+            if validation["status"] == "APPROVED":
+                files_count = len(optimized.get("files", []))
+                confidence["Optimizer"] = f"Confident - {files_count} files optimized"
+                confidence["Validator"] = f"Confident - APPROVED on attempt {attempt+1}"
+                log("Validator", "Solution approved")
+                break
+            else:
+                log("Validator", f"Rejected - attempt {attempt+1} - retrying...")
+                critic_review["feedback"] += f"\nValidator feedback: {validation['feedback']}"
 
+                if attempt == MAX_RETRIES - 1:
+                    confidence["Optimizer"] = "Low - could not fully optimize"
+                    confidence["Validator"] = f"Low - REJECTED after {MAX_RETRIES} attempts"
+        else:
+            files_count = len(optimized.get("files", []))
+            confidence["Optimizer"] = f"Confident - {files_count} files optimized"
+            confidence["Validator"] = "Skipped - not needed for this task"
+            break
 
+    # step 8 - reporter
+    report = reporter(task, language, optimized, analysis, research)
+    if report:
+        confidence["Reporter"] = f"Confident - docs saved to {project_folder}/"
+    else:
+        confidence["Reporter"] = "Low - minimal documentation saved"
+
+    # time taken
+    end_time = datetime.datetime.now()
+    time_taken = (end_time - start_time).seconds
+
+    # print confidence report
+    print_confidence_report(confidence)
+
+    # summary
+    print("NEXUS AI Complete")
+    print("-" * 60)
+    print(f"Time taken   : {time_taken} seconds")
+    print(f"Total tokens : {token_usage['total_tokens']}")
+    print(f"API calls    : {token_usage['api_calls']}")
+    print("-" * 60)
+    print("Output files:")
+    output_project = os.path.join(OUTPUTS_DIR, project_folder)
+    if os.path.exists(output_project):
+        for f in os.listdir(output_project):
+            print(f"  - outputs/{project_folder}/{f}")
+    else:
+        for f in os.listdir(OUTPUTS_DIR):
+            print(f"  - outputs/{f}")
+    print("-" * 60)
+
+    log("SYSTEM", f"Complete | Time: {time_taken}s | Tokens: {token_usage['total_tokens']} | Calls: {token_usage['api_calls']}")
+
+    return {
+        "project_folder": project_folder,
+        "language": language,
+        "optimized": optimized,
+        "confidence": confidence,
+        "tokens_used": token_usage["total_tokens"],
+        "api_calls": token_usage["api_calls"]
+    }
+
+# interactive mode
+def interactive_mode(last_result):
+    while True:
+        print("-" * 60)
+        print("What do you want to do next?")
+        print("-" * 60)
+        print("  1. Run a new task")
+        print("  2. Add more features to current project")
+        print("  3. Add unit tests to current project")
+        print("  4. Exit")
+        print("-" * 60)
+
+        choice = input("Enter choice (1-4): ").strip()
+
+        if choice == "1":
+            # run new task
+            task = input("Enter your new task: ").strip()
+            if not task:
+                print("No task provided!")
+                continue
+            last_result = run_nexus_ai(task)
+
+        elif choice == "2":
+            # improve current project
+            if not last_result:
+                print("No current project to improve!")
+                continue
+            feature = input("What feature do you want to add? ").strip()
+            if not feature:
+                print("No feature provided!")
+                continue
+            # build improvement task
+            project_folder = last_result.get("project_folder", "")
+            language = last_result.get("language", "")
+            improvement_task = f"Add {feature} to the existing {project_folder} project written in {language}"
+            last_result = run_nexus_ai(improvement_task)
+
+        elif choice == "3":
+            # add unit tests
+            if not last_result:
+                print("No current project to test!")
+                continue
+            project_folder = last_result.get("project_folder", "")
+            language = last_result.get("language", "")
+            test_task = f"Write unit tests for the {project_folder} project written in {language}"
+            last_result = run_nexus_ai(test_task)
+
+        elif choice == "4":
+            print("-" * 60)
+            print("Thank you for using NEXUS AI!")
+            print("-" * 60)
+            break
+
+        else:
+            print("Invalid choice! Please enter 1, 2, 3 or 4")
+
+# entry point
 if __name__ == "__main__":
-    print("=" * 60)
+    print("-" * 60)
     print("Welcome to NEXUS AI")
-    print("=" * 60)
-    
+    print("-" * 60)
     task = input("Enter your task: ").strip()
-    run_nexus_ai(task)
+    if not task:
+        print("No task provided!")
+    else:
+        last_result = run_nexus_ai(task)
+        interactive_mode(last_result)

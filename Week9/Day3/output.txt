@@ -1,0 +1,2 @@
+Column Names: [column1, column2, column3...]
+Total Row Count: rowCount
